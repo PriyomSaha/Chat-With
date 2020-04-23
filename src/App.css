@@ -1,0 +1,30 @@
+.App
+{
+  text-align: center;
+}
+.form
+{
+    width:100%;
+    max-width:350px;
+    padding :5px;
+    margin:2rem auto;
+    height:100%;
+    border-radius: 5px;
+}
+.label
+{
+    display: inline-block;
+		text-align: right;
+    float: left;
+    margin-top: 1rem;
+}
+.togglePassword{
+  position: absolute;
+  top: 65%;
+  right: 2rem;
+  color: #666;
+  z-index: 9999;
+  user-select: none;
+  cursor: pointer;
+
+}
