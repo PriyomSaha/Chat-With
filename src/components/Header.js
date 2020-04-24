@@ -44,16 +44,17 @@ class Header extends Component {
         };
         return (
             <div>
+                
                 <Navbar color="info" light expand="md">
                     <NavbarBrand><h1 className="logo">Chat With...</h1></NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto headerButtons" navbar>
                             <NavItem>
-                                <NavLink href="/login" style={design}>Log In</NavLink>
+                            <Link to='/signup'><NavLink style={design}>Log In</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/Signup" style={design}>Sign Up</NavLink>
+                                <Link to='/signup'><NavLink style={design}>Sign Up</NavLink></Link>
                             </NavItem>
                         </Nav>
                     </Collapse>
