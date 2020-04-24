@@ -3,7 +3,6 @@ import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
 import firebase from "../firebase";
 
-import { encrypt, decrypt } from 'react-native-simple-encryption';
 
 function Signup() {
     const [name, setName] = useState('');
