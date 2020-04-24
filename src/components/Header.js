@@ -1,27 +1,65 @@
-import React, { useState } from 'react';
-import { Collapse ,NavbarToggler,Row, Col}
-    from 'reactstrap';
-    import "bootstrap/dist/css/bootstrap.css";
-const Example = (props) => {
-    const [collapsed, setCollapsed] = useState(true);
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
+} from 'reactstrap';
+class Header extends Component {
+    constructor(props) {
+        super(props);
 
-    const toggleNavbar = () => setCollapsed(!collapsed);
-
-    return (
-
-        <Row >
-            <Col xs="6">
-                <h1>Chat With...</h1>
-            </Col>
-
-            <Col xs="6">
-            <Collapse>
-                <NavbarToggler  className="mr-2"/>
-             </Collapse>
-            </Col>
-        </Row>
-
-    );
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false,
+            navCollapsed: true,
+            showNavbar: false
+        };
+    }
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    render() {
+        const { navCollapsed } = this.state
+        const design = {
+            color: 'white',
+            width:'100%',
+            background: 'rgb(93, 164, 226)',
+            borderRadius: '5px',
+            padding: '2vh',
+            fontWeight: 'bold',
+            textDecoration: 'none',
+            marginRight:'10px',
+            border:'1px solid white'
+        };
+        return (
+            <div>
+                <Navbar color="info" light expand="md">
+                    <NavbarBrand><h1 className="logo">Chat With...</h1></NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto headerButtons" navbar>
+                            <NavItem>
+                                <NavLink href="/login" style={design}>Log In</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/Signup" style={design}>Sign Up</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>
+            </div>
+        )
+    }
 }
-
-export default Example;
+export default Header

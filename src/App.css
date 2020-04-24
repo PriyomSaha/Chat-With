@@ -10,6 +10,7 @@
     margin:2rem auto;
     height:100%;
     border-radius: 5px;
+    box-shadow: azure;
 }
 .label
 {
@@ -26,5 +27,8 @@
   z-index: 9999;
   user-select: none;
   cursor: pointer;
-
+}
+.logo
+{
+  color: aliceblue;
 }
