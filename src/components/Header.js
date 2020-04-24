@@ -30,7 +30,7 @@ class Header extends Component {
         });
     }
     render() {
-        const { navCollapsed } = this.state
+        
         const design = {
             color: 'white',
             width:'100%',
@@ -39,22 +39,23 @@ class Header extends Component {
             padding: '2vh',
             fontWeight: 'bold',
             textDecoration: 'none',
-            marginRight:'10px',
+            marginRight:'15px',
+            marginBottom:'5px',
             border:'1px solid white'
         };
         return (
             <div>
                 
                 <Navbar color="info" light expand="md">
-                    <NavbarBrand><h1 className="logo">Chat With...</h1></NavbarBrand>
+                    <Link to='/'><NavbarBrand><h1 className="logo">Chat With...</h1></NavbarBrand></Link>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto headerButtons" navbar>
                             <NavItem>
-                            <Link to='/signup'><NavLink style={design}>Log In</NavLink></Link>
+                            <Link to='/login'><NavLink style={design} size="6" className="py-3 px-md-5">Log In</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <Link to='/signup'><NavLink style={design}>Sign Up</NavLink></Link>
+                                <Link to='/signup'><NavLink style={design}size="6" className="py-3 px-md-5">Sign Up</NavLink></Link>
                             </NavItem>
                         </Nav>
                     </Collapse>

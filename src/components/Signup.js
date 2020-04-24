@@ -3,13 +3,18 @@ import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
 import firebase from "../firebase";
 
+import { encrypt, decrypt } from 'react-native-simple-encryption';
+
 function Signup() {
     const [name, setName] = useState('');
     const [uname, setUname] = useState('');
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
+    var CryptoJS = require("crypto-js");
+
     function useDetails() {
+        var ciphertext = CryptoJS.AES.encrypt(password, 'secret key 123');
         firebase
             .firestore()
             .collection("users")
@@ -18,24 +23,29 @@ function Signup() {
                 User_name: uname,
                 E_mail: email,
                 Mobile: mobile,
-                Password: password
+                Password: ciphertext.toString()
             });
+        /*var ciphertext = CryptoJS.AES.encrypt(password, 'secret key 123');
+        console.log("encrypted text", ciphertext.toString());
+
+        var bytes = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+        console.log("decrypted text", plaintext);*/
+
         setName('');
         setUname('');
         setEmail('');
         setMobile('');
         setPassword('');
     }
-    const [passwordType , setPasswordType] = useState('password');
-    const [passwordToggleText , setPasswordToggleText] = useState('Show');
-    const passwordToggle = () =>{
-        if(passwordType == "password")
-        {
+    const [passwordType, setPasswordType] = useState('password');
+    const [passwordToggleText, setPasswordToggleText] = useState('Show');
+    const passwordToggle = () => {
+        if (passwordType == "password") {
             setPasswordType('text')
             setPasswordToggleText('Hide')
         }
-        else
-        {
+        else {
             setPasswordType('password')
             setPasswordToggleText('Show')
         }
