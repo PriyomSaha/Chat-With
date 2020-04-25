@@ -14,7 +14,7 @@ function Signup() {
 
     function useDetails() {
         var ciphertext = CryptoJS.AES.encrypt(password, 'secret key 123');
-       /* firebase
+       firebase
             .firestore()
             .collection("users")
             .add({
@@ -23,7 +23,7 @@ function Signup() {
                 E_mail: email,
                 Mobile: mobile,
                 Password: ciphertext.toString()
-            });*/
+            });
         alert(fname + " your account has been created now go to log in page and try logging in");
         setFname('');
         setLname('');
