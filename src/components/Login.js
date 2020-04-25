@@ -11,28 +11,41 @@ function Login() {
     var CryptoJS = require("crypto-js");
 
     function useDetails() {
-        
+
         firebase
             .firestore()
             .collection("users")
             .get().then((snapshot) => {
-                snapshot.docs.forEach((doc) =>{
-                   // console.log(doc.data().Mobile);
+                snapshot.docs.forEach((doc) => {
+                    // console.log(doc.data().Mobile);
 
-                   if(email === '' && mobile === doc.data().Mobile)
-                   {
-                    var bytes = CryptoJS.AES.decrypt(doc.data().Password, 'secret key 123');
-                    var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-                                             
-                    if(password === plaintext)
-                    {
-                        var fname = doc.data().Full_name;
-                        
-                        alert("Successfully logged in as : " + fname);
-                        
+                    if (email === '' && mobile === doc.data().Mobile) {
+                        var bytes = CryptoJS.AES.decrypt(doc.data().Password, 'secret key 123');
+                        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+                        if (password === plaintext) {
+                            var fname = doc.data().Full_name;
+
+                            alert("Successfully logged in as : " + fname);
+
+                        }
                     }
-                   }
-                })              
+                    else if (mobile === '' && email === doc.data().E_mail) {
+                        var bytes = CryptoJS.AES.decrypt(doc.data().Password, 'secret key 123');
+                        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+                        if (password === plaintext) {
+                            var fname = doc.data().Full_name;
+
+                            alert("Successfully logged in as : " + fname);
+
+                        }
+                    }
+                    else
+                    {
+                        alert("For a successful login either enter Mobile no. or enter Email id and password is mandatory");
+                    }
+                })
             });
         setEmail('');
         setMobile('');
