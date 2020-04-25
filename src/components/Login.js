@@ -9,42 +9,31 @@
         const [mobile, setMobile] = useState('');
         const [password, setPassword] = useState('');
         var CryptoJS = require("crypto-js");
-        let bol = false;
-        const check = () => {
-            firebase
-                .firestore()
-                .collection("users")
-                .get().then((snapshot) => {
-                    snapshot.docs.forEach((doc) => {
-                        // console.log(doc.data().Mobile);
-                        var bytes = CryptoJS.AES.decrypt(doc.data().Password, 'secret key 123');
-                        var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-                        var fname = doc.data().Full_name;
-                        if (email === '' && mobile === doc.data().Mobile) {
-                            if (password === plaintext) {
-                                alert("Successfully logged in as : " + fname);
-                            }
-                            else { alert("Wrong 1 or more credentials.."); }
-                            bol = true;
-                        }
-                        else if (mobile === '' && email === doc.data().E_mail) {
-                            if (password === plaintext) {
-                                alert("Successfully logged in as : " + fname);
-                            }
-                            else { alert("Wrong 1 or more credentials.."); }
-                            bol = true;
-                        }
-                        else if(bol === false)
-                        {
-                            alert("For a successful login either enter Mobile no. or enter Email id and password is mandatory");
-                            bol = true;
-                        }
-                    });
-                });
 
-            setEmail('');
-            setMobile('');
-            setPassword('');
+        const check =()=>{
+            firebase
+            .firestore()
+            .collection("users")
+            .get().then((snapshot) => {
+                const user = snapshot.docs.find(doc => (email === '' && mobile === doc.data().Mobile) || (mobile === '' && email === doc.data().E_mail));
+                if (!user) {
+                    // Matching user not found
+                    alert("For a successful login either enter Mobile no. or enter Email id and password is mandatory");
+                    return;
+                }
+                var bytes = CryptoJS.AES.decrypt(user.data().Password, 'secret key 123');
+                var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+                if (password !== plaintext) {
+                     alert("Wrong 1 or more credentials..");
+                     return;
+                }
+                var fname = user.data().Full_name;
+                alert("Successfully logged in as : " + fname);
+            });
+
+        setEmail('');
+        setMobile('');
+        setPassword('');
         }
         const [passwordType, setPasswordType] = useState('password');
         const [passwordToggleText, setPasswordToggleText] = useState('Show');
