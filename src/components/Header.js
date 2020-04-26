@@ -7,8 +7,10 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
 } from 'reactstrap';
+import Image from 'react-bootstrap/Image'
+import Logo from "../logos/logos_white.png";
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -43,7 +45,11 @@ class Header extends Component {
             <div>
                 
                 <Navbar color="info" light expand="md">
-                    <Link to='/'><NavbarBrand><h1 className="logo">Chat With...</h1></NavbarBrand></Link>
+                
+                   {/* */}
+                    <NavbarBrand>
+                    <Link to='/'><Image src={Logo} className="logo"/></Link>
+                    </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto headerButtons" navbar>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
 import firebase from "../firebase";
-
+import Header from '../components/Header';
 
 function Signup() {
     const [fname, setFname] = useState('');
@@ -44,6 +44,7 @@ function Signup() {
         }
     }
     return (
+        <div><Header />
         <Form className="form col-12" >
             <Row>
                 <Card body >
@@ -83,6 +84,7 @@ function Signup() {
                 </Card>
             </Row>
         </Form>
+        </div>
     )
 }
 

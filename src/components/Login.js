@@ -2,8 +2,7 @@
     import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
         from 'reactstrap'
     import firebase from "../firebase";
-
-
+    import Header from '../components/Header';
     function Login() {
         const [email, setEmail] = useState('');
         const [mobile, setMobile] = useState('');
@@ -47,7 +46,10 @@
                 setPasswordToggleText('Show')
             }
         }
+        
         return (
+            <div>
+                <Header />           
             <Form className="form col-12" >
                 <Row>
                     <Card body >
@@ -81,6 +83,7 @@
                     </Card>
                 </Row>
             </Form>
+            </div>
         )
     }
 
