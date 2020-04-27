@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
 import { database } from "../firebase";
@@ -9,7 +9,20 @@ export default function AddNewRoom() {
     const [roomName, setRoomName] = useState('');
     const [password, setPassword] = useState('');
     const [retypedPassword, setRetypedPassword] = useState('');
-    
+    const [roomNames, setRoomNames] = useState([]);
+
+    useEffect(() =>{
+    var path ='';
+    path = path.concat('Messages','/');       
+    var ref = database.ref(path);
+    ref.on('value',gotData);       
+        function gotData(data){
+            var items = data.val();
+            var key = Object.keys(items); 
+            setRoomNames(key);
+        }
+    },[]);
+  
     const validatePassword = () =>{
         if( password === retypedPassword)
             addDataToDB();
@@ -17,16 +30,22 @@ export default function AddNewRoom() {
             alert("Password Mismatch! Re-typed password should match With the Password");
     }
 
-    const addDataToDB = () => {     
+    const addDataToDB = () => {   
+        if(roomNames.indexOf(roomName) === -1)
+        {
         var path ='';
         path = path.concat('Messages','/',roomName,'/','password');       
         var ref = database.ref(path);
         ref.push(password);
-        alert("Hurrah! Room Created..." + roomName);
-        setRoomName('');
+        alert("Hurrah! Room Created by the name : " + roomName);
         setPassword('');
         setRetypedPassword('');
-           
+        }
+        else
+            alert("Room Name '"+ roomName +"' already exists! Please Try a different Name.")
+            
+
+        setRoomName('');         
     }
 
     const [passwordType, setPasswordType] = useState('password');
