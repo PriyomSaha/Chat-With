@@ -22,7 +22,7 @@ export default function AddNewRoom() {
         path = path.concat('Messages','/',roomName,'/','password');       
         var ref = database.ref(path);
         ref.push(password);
-
+        alert("Hurrah! Room Created..." + roomName);
         setRoomName('');
         setPassword('');
         setRetypedPassword('');
