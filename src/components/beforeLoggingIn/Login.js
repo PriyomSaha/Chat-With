@@ -4,13 +4,14 @@ import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
 import { firebaseApp } from "../firebase";
 import Header from './Header';
 import {Redirect} from 'react-router-dom'
-import Home from '../afterLoggingIn/AddNewRoom';
 function Login() {
 
+   /* rijusaha1234@gmail.com
+    Mypassword1#    */
     const [loggedIn , setLoggedIn] = useState(false)
-    const [email, setEmail] = useState('rijusaha1234@gmail.com');
+    const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
-    const [password, setPassword] = useState('Mypassword1#');
+    const [password, setPassword] = useState('');
     var CryptoJS = require("crypto-js");
 
     const check = () => {

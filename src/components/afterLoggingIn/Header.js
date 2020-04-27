@@ -46,7 +46,7 @@ class Header extends Component {
                 
                 <Navbar color="info" light expand="md">
                     <NavbarBrand>
-                    <Link to=''><Image src={Logo} className="logo"/></Link>
+                    <Link to='/roomlists'><Image src={Logo} className="logo"/></Link>
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -56,7 +56,7 @@ class Header extends Component {
                                 className="py-3 px-md-5">Create New Room</NavLink></Link>
                             </NavItem>
                             <NavItem>
-                                <Link to=''><NavLink style={design}size="6"
+                                <Link to='/'><NavLink style={design}size="6"
                                 className="py-3 px-md-5">Log out</NavLink></Link>
                             </NavItem>
                         </Nav>
