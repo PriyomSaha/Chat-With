@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../components/Header';
+import Header from './Header';
 import Image from 'react-bootstrap/Image';
 import MainLogo from "../logos/Chat-With-logos_transparent.png";
 export default function Home() {

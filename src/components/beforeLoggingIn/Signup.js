@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
-import firebase from "../firebase";
-import Header from '../components/Header';
+import {firebaseApp} from "../firebase";
+import Header from './Header';
 
 function Signup() {
     const [fname, setFname] = useState('');
@@ -14,7 +14,7 @@ function Signup() {
 
     function useDetails() {
         var ciphertext = CryptoJS.AES.encrypt(password, 'secret key 123');
-       firebase
+        firebaseApp
             .firestore()
             .collection("users")
             .add({

@@ -1,16 +1,20 @@
-    import React, { useState } from 'react'
-    import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
-        from 'reactstrap'
-    import firebase from "../firebase";
-    import Header from '../components/Header';
-    function Login() {
-        const [email, setEmail] = useState('');
-        const [mobile, setMobile] = useState('');
-        const [password, setPassword] = useState('');
-        var CryptoJS = require("crypto-js");
+import React, {useState } from 'react'
+import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
+    from 'reactstrap'
+import { firebaseApp } from "../firebase";
+import Header from './Header';
+import {Redirect} from 'react-router-dom'
+import Home from '../afterLoggingIn/AddNewRoom';
+function Login() {
 
-        const check =()=>{
-            firebase
+    const [loggedIn , setLoggedIn] = useState(false)
+    const [email, setEmail] = useState('rijusaha1234@gmail.com');
+    const [mobile, setMobile] = useState('');
+    const [password, setPassword] = useState('Mypassword1#');
+    var CryptoJS = require("crypto-js");
+
+    const check = () => {
+        firebaseApp
             .firestore()
             .collection("users")
             .get().then((snapshot) => {
@@ -23,33 +27,45 @@
                 var bytes = CryptoJS.AES.decrypt(user.data().Password, 'secret key 123');
                 var plaintext = bytes.toString(CryptoJS.enc.Utf8);
                 if (password !== plaintext) {
-                     alert("Wrong 1 or more credentials..");
-                     return;
+                    alert("Wrong 1 or more credentials..");
+                    return;
                 }
-                var fname = user.data().Full_name;
-                alert("Successfully logged in as : " + fname);
+                newPage(user);
+                
             });
 
         setEmail('');
         setMobile('');
         setPassword('');
+    }
+    function newPage(user)
+    {
+      
+        setLoggedIn(true);
+        var fname = user.data().Full_name;
+            alert("Successfully logged in as : " + fname);
+    }
+    const [passwordType, setPasswordType] = useState('password');
+    const [passwordToggleText, setPasswordToggleText] = useState('Show');
+    
+    const passwordToggle = () => {
+        if (passwordType === "password") {
+            setPasswordType('text')
+            setPasswordToggleText('Hide')
         }
-        const [passwordType, setPasswordType] = useState('password');
-        const [passwordToggleText, setPasswordToggleText] = useState('Show');
-        const passwordToggle = () => {
-            if (passwordType === "password") {
-                setPasswordType('text')
-                setPasswordToggleText('Hide')
-            }
-            else {
-                setPasswordType('password')
-                setPasswordToggleText('Show')
-            }
+        else {
+            setPasswordType('password')
+            setPasswordToggleText('Show')
         }
-        
-        return (
-            <div>
-                <Header />           
+    }
+    if( loggedIn === true)
+     {
+         return <Redirect to="/roomlists"/>
+     }
+
+    return (
+        <div>
+            <Header />
             <Form className="form col-12" >
                 <Row>
                     <Card body >
@@ -83,8 +99,8 @@
                     </Card>
                 </Row>
             </Form>
-            </div>
-        )
-    }
+        </div>
+    )
+}
 
-    export default Login
+export default Login
