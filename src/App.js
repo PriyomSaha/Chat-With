@@ -7,6 +7,7 @@ import Login from './components/beforeLoggingIn/Login'
 import Home from './components/beforeLoggingIn/Home';
 import AddNewRoom from './components/afterLoggingIn/AddNewRoom';
 import RoomLists from './components/afterLoggingIn/RoomLists';
+import ChatRoom from './components/afterLoggingIn/ChatRoom';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path='/login' component={Login} />
         <Route path='/roomlists' component={RoomLists} />
         <Route path='/addroom' component={AddNewRoom} />
-        {/* <AddNewRoom /> */}
+        <Route path='/chatroom' component={ChatRoom} />
       </div>
     </Router>   
   );

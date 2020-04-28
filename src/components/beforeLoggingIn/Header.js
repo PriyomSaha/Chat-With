@@ -41,6 +41,9 @@ class Header extends Component {
             marginBottom:'5px',
             border:'1px solid white'
         };
+        const design1 ={
+            padding:'0.5vh 2vh 0 2vh'
+        }
         return (
             <div>
                 
@@ -53,10 +56,10 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto headerButtons" navbar>
-                            <NavItem>
+                            <NavItem style={design1}>
                             <Link to='/login'><NavLink style={design} size="6" className="py-3 px-md-5">Log In</NavLink></Link>
                             </NavItem>
-                            <NavItem>
+                            <NavItem style={design1}>
                                 <Link to='/signup'><NavLink style={design}size="6" className="py-3 px-md-5">Sign Up</NavLink></Link>
                             </NavItem>
                         </Nav>

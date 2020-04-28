@@ -3,10 +3,12 @@ import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
 import { database } from "../firebase";
 import Header from './Header';
+import {Redirect} from 'react-router-dom'
 
 export default function AddNewRoom() {
 
     const [roomName, setRoomName] = useState('');
+    const [roomCreated, setRoomCreated] = useState(false);
     const [password, setPassword] = useState('');
     const [retypedPassword, setRetypedPassword] = useState('');
     const [roomNames, setRoomNames] = useState([]);
@@ -40,11 +42,11 @@ export default function AddNewRoom() {
         alert("Hurrah! Room Created by the name : " + roomName);
         setPassword('');
         setRetypedPassword('');
+        setRoomCreated(true);
         }
         else
             alert("Room Name '"+ roomName +"' already exists! Please Try a different Name.")
             
-
         setRoomName('');         
     }
 
@@ -61,6 +63,10 @@ export default function AddNewRoom() {
             setPasswordToggleText('Show')
         }
     }
+    if( roomCreated === true)
+     {
+         return <Redirect to="/roomlists"/>
+     }
 
     return (
         <div>
