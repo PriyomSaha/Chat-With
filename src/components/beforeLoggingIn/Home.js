@@ -13,7 +13,7 @@ export default function Home() {
             <Header />
             <div>
             <h1 className="mt-5">Welcome To</h1>
-            <Image src={MainLogo} className="logoBody mt-5"/>
+            <Image src={MainLogo} className="logoBody mt-4"/>
             </div>
         </div>
     )

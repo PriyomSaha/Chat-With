@@ -62,3 +62,34 @@
   height:'100vh';
   color:'#5065A8';
 }
+.opponent
+{
+  background-color: #007bff;
+  max-width: 80%;
+  color:white;
+  float:left;
+  margin-left: 5px;
+  text-align: left;
+}
+.own
+{
+  background-color: #c3c7cc;
+  max-width: 80%;
+  color:black;
+  float:right;
+  margin-top: 1rem;
+  margin-right: 5px;
+  text-align: right; 
+}
+.msg{
+  margin-top: 1rem;
+  border-radius: 10px;
+  padding:2vh;
+
+}
+.input-msg
+{
+  position: fixed; 
+  bottom: 0px;
+  width: 200%; 
+}

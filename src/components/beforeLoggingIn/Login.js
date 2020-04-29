@@ -1,17 +1,20 @@
-import React, {useState } from 'react'
+import React, {useState,useContext } from 'react'
 import { Form, FormGroup, Label, Input, Button, Card, CardTitle, Row, Col }
     from 'reactstrap'
 import { firebaseApp } from "../firebase";
 import Header from './Header';
 import {Redirect} from 'react-router-dom'
+import { UserNameContext } from '../UserContext'
 function Login() {
+
+   const {userName,setUserName} = useContext(UserNameContext);
 
    /* rijusaha1234@gmail.com
     Mypassword1#    */
     const [loggedIn , setLoggedIn] = useState(false)
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('rijusaha1234@gmail.com');
     const [mobile, setMobile] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('Mypassword1#');
     var CryptoJS = require("crypto-js");
 
     const check = () => {
@@ -44,6 +47,7 @@ function Login() {
       
         setLoggedIn(true);
         var fname = user.data().Full_name;
+        setUserName(fname);
             alert("Successfully logged in as : " + fname);
     }
     const [passwordType, setPasswordType] = useState('password');
@@ -63,6 +67,7 @@ function Login() {
      {
          return <Redirect to="/roomlists"/>
      }
+
 
     return (
         <div>

@@ -38,7 +38,7 @@ class Header extends Component {
             textDecoration: 'none',
             marginRight: '15px',
             marginBottom: '5px',
-            border: '1px solid white'
+            border: '1px solid white',
         };
         const design1 ={
             padding:'0.5vh 2vh 0 2vh'
