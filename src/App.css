@@ -65,31 +65,40 @@
 .opponent
 {
   background-color: #007bff;
-  max-width: 80%;
-  color:white;
   float:left;
   margin-left: 5px;
   text-align: left;
 }
 .own
 {
-  background-color: #c3c7cc;
-  max-width: 80%;
-  color:black;
+  background-color: #333333;
   float:right;
   margin-top: 1rem;
   margin-right: 5px;
-  text-align: right; 
+  text-align: left; 
 }
 .msg{
   margin-top: 1rem;
   border-radius: 10px;
   padding:2vh;
-
+  max-width: 80%;
+  min-width: 50%;
+  color:white;
 }
-.input-msg
+.msg-textbox{
+  position:fixed;
+  width: 80%;
+  border: 2.5px solid #17a2b8;
+  border-radius: 10px;
+  left:0;
+  bottom:0.5px;
+  background: #17a2b8;
+}
+.send
 {
-  position: fixed; 
-  bottom: 0px;
-  width: 200%; 
+  position:fixed;
+  right:1vh;
+  bottom:0.5px;
+  width:calc(2em + .75rem + 2px);
+  height:calc(2em + .75rem + 2px);
 }

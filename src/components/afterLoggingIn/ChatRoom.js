@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React , { useState,useEffect,useContext} from 'react'
 import Header from './Header';
 import { UserNameContext, RoomNameContext } from '../UserContext'
 import background from './chatBackground.jpg';
+import InputMessage from './InputMessage'
 export default function ChatRoom() {
 
     const { userName, setUserName } = useContext(UserNameContext);
@@ -14,6 +15,8 @@ export default function ChatRoom() {
         minHeight: '100vh',
         position: 'absolute',
         paddingTop: '100px',
+        paddingBottom:'10vh',
+        width:'100%'
     }
     const header ={
         position: 'fixed',
@@ -21,77 +24,28 @@ export default function ChatRoom() {
         width: '100%',
         height: 'auto',
     }
+
+    const [messageType,setmessageType] = useState('');
+
     return (
 
         <div>
-            <div style= {header}><Header /></div>
+            <div style= {header}>
+                <Header />
+            </div>
 
             <div>           
-                <div style={messageContainer}>
-                <div className="opponent msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div>
-                <br/>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="opponent msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="opponent msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div><div className="own msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="opponent msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div><div className="own msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div><div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="opponent msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div><div className="own msg">
-                    <p>Hey! how are you please let me know how is it going</p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="own msg">
-                    <p className="text">Hey! how are you please let me
-                        </p>
-                </div>
-                <div className="input-message">z</div>
+                    <div style={messageContainer}>
+                        <div className="opponent msg">
+                            <p>Hey! how are you please let me know how is it going</p>
+                        </div>
+                        <div className="own msg">
+                            <p className="text">euiq gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdgysey</p>
+                        </div>
+                    </div>
             </div>
-            </div>
+
+            <InputMessage/>
         </div>
     )
 }
