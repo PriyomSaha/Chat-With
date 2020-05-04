@@ -49,7 +49,7 @@ export default function RoomLists() {
                 {
                     alert("You have Successfully entered the Room");
                     setChatRoom(true);
-                    setRoomName(roomName)
+                    setRoomName(roomName);
                 }
                 else
                 {

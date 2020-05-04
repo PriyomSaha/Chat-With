@@ -90,15 +90,26 @@
   width: 80%;
   border: 2.5px solid #17a2b8;
   border-radius: 10px;
-  left:0;
-  bottom:0.5px;
+  left:1vh;
+  bottom:1vh;
   background: #17a2b8;
 }
 .send
 {
   position:fixed;
   right:1vh;
-  bottom:0.5px;
+  bottom:1vh;
   width:calc(2em + .75rem + 2px);
   height:calc(2em + .75rem + 2px);
+}
+.by
+{
+  font-size:2vh;
+  color:	#C0C0C0;
+}
+.time
+{
+  float: right;
+  font-size:2vh;
+  color:	#C0C0C0;
 }
