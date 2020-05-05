@@ -50,7 +50,7 @@ export default function ChatRoom() {
             }, 3000);
         }
         return () => isSubscribed = false
-    });
+    },[]);
 
     return (
 
