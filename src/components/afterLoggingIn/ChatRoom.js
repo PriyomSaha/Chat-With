@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Header from './Header';
 import { UserNameContext, RoomNameContext } from '../UserContext'
-import background from './chatBackground.jpg';
-import InputMessage from './InputMessage';
 import { database } from "../firebase";
+
+import background from './chatBackground.jpg';
+
+import Header from './Header';
+import InputMessage from './InputMessage';
+import Messages from './Messages';
+
 export default function ChatRoom() {
 
-    //const { userName, setUserName } = useContext(UserNameContext);
+    const { userName, setUserName } = useContext(UserNameContext);
     const { roomName, setRoomName } = useContext(RoomNameContext);
     const messageContainer = {
         backgroundImage: `url(${background})`,
@@ -25,8 +29,7 @@ export default function ChatRoom() {
         width: '100%',
         height: 'auto',
     }
-    //const [messageDetails, setMesageDetails] = useState([]);
-    let messageDetails = [];
+    const [messageDetails, setMesageDetails] = useState([]);
     var path = '';
     path = path.concat('Messages', '/', roomName);
     useEffect(() => {
@@ -37,16 +40,11 @@ export default function ChatRoom() {
                 ref.on('value', (snapshot) => {
                     snapshot.forEach(item => {
                         if (item.key != 'password') {
-                            messageDetails.push({
-                                id: item.key,
-                                ...item.val()
-                            })
-                            //console.log(item.val());
-                            //setMesageDetails(item.val());
+                        setMesageDetails([...messageDetails,item.val()])
                         }
                     })
                 });
-                messageDetails.map(messageDetail => console.log(messageDetail))
+                //messageDetails.map(messageDetail => console.log(messageDetail))
             }, 3000);
         }
         return () => isSubscribed = false
@@ -59,25 +57,10 @@ export default function ChatRoom() {
                 <Header />
             </div>
             <div style={messageContainer}>
-                
-                {/*
-                <div className="opponent msg">
-                    <span className="by">Deabrnab</span>
-                    <p>Hey! how are you please let me know how is it going</p>
-                    <span className="time">11:20 am</span>
-                </div>
-                <div className="own msg">
-                    <span className="by">Priyom</span>
-                    <p className="text">euiq gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdgysey</p>
-                    <span className="time">11:20 am</span>
-                </div>*/
-                }
-
-
-
+                <Messages messageDetails={messageDetails} userName={userName}/>
             </div>
 
-            <InputMessage />
+            <InputMessage messageDetails={messageDetails} setMesageDetails={setMesageDetails}/>
         </div>
     )
 }

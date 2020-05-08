@@ -16,23 +16,33 @@
             background: 'black',
         }
 
+        const [addToMessageList, setAddToMessageList] = useState(true)
         const [message,setMessage] = useState('');
-        const date= moment().format('YYYYMMDD');
-        const time=moment().format('h:mm a')
+        const timeStamp=moment().format('YYYYMMD,h:mm:ssa');
+        const time = moment().format('h:mm a');
         const messageToDB = () => {
         const data ={
-            Sender : userName,
             Message : message,
-            Date:date,
-            Time : time
+            Sender : userName,
+            Time : time,
+            Time_Stamp : timeStamp
         }
         var path ='';
-            path = path.concat('Messages','/',roomName);
-            var ref = database.ref(path);
-            ref.push(data);
-            
-            setMessage('');
+        path = path.concat('Messages','/',roomName);
+        var ref = database.ref(path);
+        ref.push(data);
+        
+        prop.setMesageDetails([...prop.messageDetails,data])
+
+        setMessage('');
+        setAddToMessageList(true);
     }
+    useEffect(() => {
+        //prop.messageDetails.map(messageDetail => console.log(messageDetail))
+        //console.log(prop.messageDetails);
+        
+        setAddToMessageList(false);
+    },[addToMessageList])
         return (
             <div style={design}>
                 <Container>
@@ -40,7 +50,8 @@
                         <div className="msg-textbox">
                             <Col>
                                 <Input className="input" type="text" placeholder="Type Message..."
-                                value={message} onChange={e => setMessage(e.target.value)} />
+                                value={message} onChange={e => setMessage(e.target.value)} 
+                                onKeyPress= {e => e.key === 'Enter' ? messageToDB() : null}/>
                             </Col>
                         </div>
                         <div>
