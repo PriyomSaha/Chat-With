@@ -2,7 +2,7 @@ import React from 'react'
 
 function Message(props) {
     let isSentByCurrentUser = false;
-
+    
     if (props.userName === props.messageBy) {
         isSentByCurrentUser = true;
     }

@@ -1,26 +1,23 @@
 import React from 'react'
-import ScrollToBottom from 'react-scroll-to-bottom'
 
 import Message from './Message';
 
 function Messages(props) {
     return (
-        <ScrollToBottom>
+        <div>
             {props.messageDetails.map((message) =>
                 <div key={message.Time_Stamp}>
                     {
-                        <Message 
-                        messageBy={message.Sender} 
-                        messageTime={message.Time} 
-                        message={message.Message} 
-                        userName={props.userName} 
-                     />
+                        <Message
+                            messageBy={message.Sender}
+                            messageTime={message.Time}
+                            message={message.Message}
+                            userName={props.userName}
+                        />
                     }
                 </div>)
-                //console.log(props.messageDetails)
-
             }
-        </ScrollToBottom>
+        </div>
     )
 }
 

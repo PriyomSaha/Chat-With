@@ -1,3 +1,5 @@
+import ScrollToBottom from 'react-scroll-to-bottom'
+
 import React, { useState, useEffect, useContext } from 'react'
 import { UserNameContext, RoomNameContext } from '../UserContext'
 import { database } from "../firebase";
@@ -29,7 +31,8 @@ export default function ChatRoom() {
         width: '100%',
         height: 'auto',
     }
-    const [messageDetails, setMesageDetails] = useState([]);
+    const [messageDet, setMesageDetails] = useState({ array: [] });
+    var messageDetails = [];
     var path = '';
     path = path.concat('Messages', '/', roomName);
     useEffect(() => {
@@ -40,15 +43,15 @@ export default function ChatRoom() {
                 ref.on('value', (snapshot) => {
                     snapshot.forEach(item => {
                         if (item.key != 'password') {
-                        setMesageDetails([...messageDetails,item.val()])
+                            messageDetails.push(item.val())
                         }
                     })
                 });
-                //messageDetails.map(messageDetail => console.log(messageDetail))
+                setMesageDetails({ array: messageDetails })
             }, 3000);
         }
         return () => isSubscribed = false
-    },[]);
+    });
 
     return (
 
@@ -56,29 +59,19 @@ export default function ChatRoom() {
             <div style={header}>
                 <Header />
             </div>
-            <div style={messageContainer}>
-                <Messages messageDetails={messageDetails} userName={userName}/>
-            </div>
 
-            <InputMessage messageDetails={messageDetails} setMesageDetails={setMesageDetails}/>
+            <ScrollToBottom>
+                <div style={messageContainer}>
+                    <Messages messageDetails={messageDet.array} userName={userName} />
+                </div>
+            </ScrollToBottom>
+
+            <InputMessage />
         </div>
     )
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//setMesageDetails={setMesageDetails}
 /*
 var path = '';
     path = path.concat('Messages', '/', roomName);

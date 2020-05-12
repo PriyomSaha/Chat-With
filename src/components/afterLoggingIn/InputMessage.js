@@ -20,7 +20,7 @@
         const [message,setMessage] = useState('');
         const timeStamp=moment().format('YYYYMMD,h:mm:ssa');
         const time = moment().format('h:mm a');
-        const messageToDB = () => {
+        const messageToDB = async () => {
         const data ={
             Message : message,
             Sender : userName,
@@ -32,17 +32,11 @@
         var ref = database.ref(path);
         ref.push(data);
         
-        prop.setMesageDetails([...prop.messageDetails,data])
+        //prop.setMesageDetails([...prop.messageDetails,data])
 
         setMessage('');
-        setAddToMessageList(true);
     }
-    useEffect(() => {
-        //prop.messageDetails.map(messageDetail => console.log(messageDetail))
-        //console.log(prop.messageDetails);
-        
-        setAddToMessageList(false);
-    },[addToMessageList])
+
         return (
             <div style={design}>
                 <Container>
