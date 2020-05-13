@@ -1,5 +1,3 @@
-import ScrollToBottom from 'react-scroll-to-bottom'
-
 import React, { useState, useEffect, useContext } from 'react'
 import { UserNameContext, RoomNameContext } from '../UserContext'
 import { database } from "../firebase";
@@ -59,12 +57,9 @@ export default function ChatRoom() {
             <div style={header}>
                 <Header />
             </div>
-
-            <ScrollToBottom>
                 <div style={messageContainer}>
                     <Messages messageDetails={messageDet.array} userName={userName} />
                 </div>
-            </ScrollToBottom>
 
             <InputMessage />
         </div>

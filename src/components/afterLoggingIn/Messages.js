@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import ReactDOM from 'react-dom';
 
 import Message from './Message';
 
 function Messages(props) {
+
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+
+        if (containerRef && containerRef.current) {
+            const element = containerRef.current;
+            element.scroll({
+                bottom: element.scrollHeight,
+                left: 0,
+                behavior: "smooth"
+            })
+        }
+
+    }, [containerRef])
+
     return (
-        <div>
+        <div ref={containerRef}>
             {props.messageDetails.map((message) =>
                 <div key={message.Time_Stamp}>
                     {
