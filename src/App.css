@@ -70,6 +70,7 @@
   max-width: 80%;
   min-width: 50%;
   color:white;
+  font-size:15px;
 }
 .opponent
 {
@@ -107,13 +108,13 @@
 }
 .by
 {
-  font-size:2vh;
+  font-size:10px;
   color:	#C0C0C0;
 }
 .time
 {
   float: right;
-  font-size:2vh;
+  font-size:10px;
   color:	#C0C0C0;
   margin-top: -20px;
   margin-right:1vh;

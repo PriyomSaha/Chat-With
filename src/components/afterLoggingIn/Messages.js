@@ -1,27 +1,18 @@
-import React, { useEffect, useRef } from 'react'
-import ReactDOM from 'react-dom';
-
+import React, { useEffect } from 'react'
 import Message from './Message';
 
 function Messages(props) {
-
-    const containerRef = useRef(null);
-
     useEffect(() => {
-
-        if (containerRef && containerRef.current) {
-            const element = containerRef.current;
-            element.scroll({
-                bottom: element.scrollHeight,
-                left: 0,
-                behavior: "smooth"
-            })
-        }
-
-    }, [containerRef])
-
+        var element = document.querySelector('.ref');
+        console.log(window.scrollY);
+        window.scroll({
+            top: element.scrollHeight,
+            left: 0,
+          });      
+    })   
+//element.scrollHeight-window.scrollY <=20
     return (
-        <div ref={containerRef}>
+        <div className="ref" >
             {props.messageDetails.map((message) =>
                 <div key={message.Time_Stamp}>
                     {

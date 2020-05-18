@@ -1,61 +1,66 @@
-    import React , { useState,useEffect,useContext} from 'react'
-    import send from './sendMessage.png';
-    import { Input, Container, Row, Col} from 'reactstrap';
-    import Image from 'react-bootstrap/Image'
-    import { database } from "../firebase";
-    import { UserNameContext, RoomNameContext } from '../UserContext'
+import React, { useState, useEffect, useContext } from 'react'
+import send from './sendMessage.png';
+import { Input, Container, Row, Col } from 'reactstrap';
+import Image from 'react-bootstrap/Image'
+import { database } from "../firebase";
+import { Redirect } from 'react-router-dom'
+import { UserNameContext, RoomNameContext } from '../UserContext'
 
-    export default function InputMessage(prop) {
+export default function InputMessage(prop) {
 
-        var moment = require('moment');
-        const { userName, setUserName } = useContext(UserNameContext);
-        const { roomName, setRoomName } = useContext(RoomNameContext);
+    var moment = require('moment');
+    const { userName, setUserName } = useContext(UserNameContext);
+    const { roomName, setRoomName } = useContext(RoomNameContext);
 
-        const design = {
-            width: '100%',
-            background: 'black',
+    const design = {
+        width: '100%',
+        background: 'black',
+    }
+
+    const [message, setMessage] = useState('');
+    const timeStamp = moment().format('YYYYMMD,h:mm:ssa');
+    const time = moment().format('h:mm a');
+    const messageToDB = async () => {
+        const data = {
+            Message: message,
+            Sender: userName,
+            Time: time,
+            Time_Stamp: timeStamp
         }
-
-        const [addToMessageList, setAddToMessageList] = useState(true)
-        const [message,setMessage] = useState('');
-        const timeStamp=moment().format('YYYYMMD,h:mm:ssa');
-        const time = moment().format('h:mm a');
-        const messageToDB = async () => {
-        const data ={
-            Message : message,
-            Sender : userName,
-            Time : time,
-            Time_Stamp : timeStamp
+        if (userName !== '' || roomName !== '') {
+            if (message !== '') {
+                var path = '';
+                path = path.concat('Messages', '/', roomName);
+                var ref = database.ref(path);
+                ref.push(data);
+            }
         }
-        var path ='';
-        path = path.concat('Messages','/',roomName);
-        var ref = database.ref(path);
-        ref.push(data);
-        
-        //prop.setMesageDetails([...prop.messageDetails,data])
+        else {
+            alert("Do not refresh the page! You need to stay Logged-In for chatting");
+        }
 
         setMessage('');
     }
 
-        return (
-            <div style={design}>
-                <Container>
-                    <Row>
-                        <div className="msg-textbox">
-                            <Col>
-                                <Input className="input" type="text" placeholder="Type Message..."
-                                value={message} onChange={e => setMessage(e.target.value)} 
-                                onKeyPress= {e => e.key === 'Enter' ? messageToDB() : null}/>
-                            </Col>
-                        </div>
-                        <div>
-                            <Col>
-                                <Image src={send} onClick={() => messageToDB()} className="send"/>
-                            </Col>
-                        </div>
-                    </Row>
-                    <div></div>
-                </Container>
-            </div>
-        )
-    }
+    return (
+        <div style={design}>
+            <Container>
+                <Row>
+                    <div className="msg-textbox">
+                        <Col>
+                            <Input className="input" type="text" placeholder="Type Message..."
+                                value={message} onChange={e => setMessage(e.target.value)}
+                                onKeyPress={e => e.key === 'Enter' ? messageToDB() : null} />
+                        </Col>
+                    </div>
+                    <div>
+                        <Col>
+                            <Image src={send} onClick={() => messageToDB()} className="send" />
+                        </Col>
+                    </div>
+                </Row>
+                <div></div>
+            </Container>
+        </div>
+    )
+}

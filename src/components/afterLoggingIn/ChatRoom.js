@@ -46,7 +46,7 @@ export default function ChatRoom() {
                     })
                 });
                 setMesageDetails({ array: messageDetails })
-            }, 3000);
+            }, 1000);
         }
         return () => isSubscribed = false
     });
