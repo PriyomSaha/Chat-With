@@ -1,26 +1,35 @@
 import React, { useEffect } from 'react'
 import Message from './Message';
 
-function Messages(props) {
+function Messages({ messageDetails, userName }) {
+    var scrollBottom = true;
     useEffect(() => {
         var element = document.querySelector('.ref');
-        console.log(window.scrollY);
-        window.scroll({
-            top: element.scrollHeight,
-            left: 0,
-          });      
-    })   
-//element.scrollHeight-window.scrollY <=20
+       
+        if (scrollBottom === false) {
+            window.preventDefault();
+        }
+        if (window.scrollY > 0) {
+            scrollBottom = false
+        }
+        if (scrollBottom === true) {
+            window.scroll({
+                top: element.scrollHeight,
+                left: 0,
+            });
+        }
+
+    }, [messageDetails])
     return (
         <div className="ref" >
-            {props.messageDetails.map((message) =>
+            {messageDetails.map((message) =>
                 <div key={message.Time_Stamp}>
                     {
                         <Message
                             messageBy={message.Sender}
                             messageTime={message.Time}
                             message={message.Message}
-                            userName={props.userName}
+                            userName={userName}
                         />
                     }
                 </div>)
@@ -30,16 +39,3 @@ function Messages(props) {
 }
 
 export default Messages
-
-/*
-<div className="opponent msg">
-<span className="by">Deabrnab</span>
-<p>Hey! how are you please let me know how is it going</p>
-<span className="time">11:20 am</span>
-</div>
-<div className="own msg">
-<span className="by">Priyom</span>
-<p className="text">euiq gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdg gdbhqwdgysey</p>
-<span className="time">11:20 am</span>
-</div>
-*/
