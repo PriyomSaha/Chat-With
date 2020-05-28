@@ -3,6 +3,7 @@ import Message from './Message';
 
 var length = 0;
 function Messages({ messageDetails, userName }) {
+    var moment = require('moment');
 
     var scrollBottom = true;
     const atBottom = () => {
@@ -57,6 +58,7 @@ function Messages({ messageDetails, userName }) {
                             <Message
                                 messageBy={message.Sender}
                                 messageTime={message.Time}
+                                messageDate = {message.Date}
                                 message={message.Message}
                                 userName={userName}
                             />
@@ -64,7 +66,7 @@ function Messages({ messageDetails, userName }) {
                     </div>)
                 }
             </div>
-            <button className="arrowButton" onClick={() => atBottom()}><i className="arrowDown"></i></button>
+            <button className="arrowButton" onClick={() => atBottom()}>B o t t o m &nbsp;<i className="arrowDown"></i></button>
         </>
     )
 }

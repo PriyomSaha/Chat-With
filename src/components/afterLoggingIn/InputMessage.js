@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import send from './sendMessage.png';
 import { Input, Container, Row, Col } from 'reactstrap';
 import Image from 'react-bootstrap/Image'
@@ -20,11 +20,13 @@ export default function InputMessage(prop) {
     const [message, setMessage] = useState('');
     const timeStamp = moment().format('YYYYMMD,h:mm:ssa');
     const time = moment().format('h:mm a');
+    const date = moment().format('DD-MM-YY');
     const messageToDB = async () => {
         const data = {
             Message: message,
             Sender: userName,
             Time: time,
+            Date : date,
             Time_Stamp: timeStamp
         }
         if (userName !== '' || roomName !== '') {

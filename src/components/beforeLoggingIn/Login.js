@@ -10,9 +10,9 @@ function Login() {
    const {userName,setUserName} = useContext(UserNameContext);
 
     const [loggedIn , setLoggedIn] = useState(false)
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('rijusaha1234@gmail.com');
     const [mobile, setMobile] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('Mypassword1#');
     var CryptoJS = require("crypto-js");
 
     const check = () => {
